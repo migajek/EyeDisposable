@@ -7,6 +7,7 @@ using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.IO;
 using System.Reflection;
+using System.Linq;
 
 namespace EyeDisposable.Logger
 {
@@ -32,21 +33,15 @@ namespace EyeDisposable.Logger
             Debug.WriteLine(string.Format("Adding object `{0}`",
                 obj.GetType().Name));
 
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
 
-            // Shove the first frame and build a stack trace
-            bool first = true;
-            foreach (StackFrame frame in new StackTrace(true).GetFrames())
-            {
-                if (first)
-                {
-                    first = false;
-                    continue;
-                }
-
+            // Shove the first frame and build a stack trace            
+            foreach (StackFrame frame in new StackTrace(true).GetFrames().Skip(1))
+            {                
+                var method = frame.GetMethod();
                 sb.Append(string.Format("> [{0}] {1} {2}",
-                    frame.GetMethod().DeclaringType.FullName,
-                    frame.GetMethod().ToString(),
+                    method.DeclaringType != null? method.DeclaringType.FullName : "",
+                    method.ToString(),
                     frame.GetFileName() == null ?
                         Environment.NewLine :
                         frame.ToString()));
