@@ -6,3 +6,9 @@ obj/
 
 /EyeDisposable.VisualState.xml
 /TestResult.xml
+packages/Newtonsoft.Json.7.0.1/lib/net20/Newtonsoft.Json.dll
+packages/Newtonsoft.Json.7.0.1/lib/net35/Newtonsoft.Json.dll
+packages/Newtonsoft.Json.7.0.1/lib/net20/Newtonsoft.Json.xml
+*.dll
+packages/Newtonsoft.Json.7.0.1/tools/install.ps1
+packages/Newtonsoft.Json.7.0.1/[Content_Types].xml
